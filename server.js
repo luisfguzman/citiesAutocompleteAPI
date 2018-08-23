@@ -2,8 +2,11 @@ const express = require('express'),
       app = express(),
       port = process.env.PORT || 3000;
 
-var routes = require('./api/routes/citiesAutocompleteRoutes'); //importing route
+const routes = require('./api/routes/citiesAutocompleteRoutes'); //importing route
+const searchServices = require('./api/services/searchServices');
+
 routes(app); //register the route
+searchServices(app);
 
 // enabling static files
 app.use(express.static('public'));
