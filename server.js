@@ -6,7 +6,7 @@ const routes = require('./api/routes/citiesAutocompleteRoutes'); //importing rou
 const searchServices = require('./api/services/searchServices');
 
 routes(app); //register the route
-searchServices(app);
+searchServices(app); //register the search services
 
 // enabling static files
 app.use(express.static('public'));
