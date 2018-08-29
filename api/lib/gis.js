@@ -1,10 +1,11 @@
+// Attaching toRadians() function to the Number object
 if (typeof(Number.prototype.toRadians) === "undefined") {
     Number.prototype.toRadians = function() {
       return (this * Math.PI) / 180;
     }
 }
 
-const R = 6371e3; // metres
+const R = 6371000; // radius of earth in meters
 
 exports.calculateDistance = function(lat1, long1, lat2, long2) {
     const φ1 = lat1.toRadians();

@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    var citiesAutocomplete = require('../controllers/citiesAutocompleteController');
+    const citiesAutocomplete = require('../controllers/citiesAutocompleteController');
   
     const path = '/suggestions';
     
