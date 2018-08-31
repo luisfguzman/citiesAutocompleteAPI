@@ -30,4 +30,10 @@ exports.inputValidation = function (q, latitude, longitude, radius) {
             error.httpStatusCode = 400;
             throw error;
         }
+
+        if(radius && (!latitude && !longitude)) {
+            const error = new Error('radius provided but no coordinates present');
+            error.httpStatusCode = 400;
+            throw error;
+        }
 }

@@ -19,11 +19,11 @@ app.use(function(req, res) {
 // middleware for 400 errors bad request
 app.use((err, req, res, next) => {
     // log the error...
-    if (err)
-        console.error(err);
+    // if (err)
+    //     console.error(err);
     res.status(err.httpStatusCode).send({error : err.message});
 });
 
-app.listen(port);
+module.exports = app.listen(port);
 
 console.log('cities autocomplete RESTful API server started on: ' + port);
