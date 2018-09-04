@@ -2,10 +2,11 @@ const express = require('express'),
     app = express(),
     port = process.env.PORT || 3000;
 
-const routes = require('./api/routes/citiesAutocompleteRoutes'); //importing route
+const config = require('./config/env.json')[process.env.NODE_ENV || 'development'];
+const routes = require('./api/routes/citiesAutocompleteRoutes');
 const searchServices = require('./api/services/searchServices');
 
-routes(app); //register the route
+routes(app); //register the routes
 searchServices.registerSearchServices(app); //register the search services
 
 // enabling static files
@@ -18,9 +19,8 @@ app.use(function(req, res) {
 
 // middleware for 400 errors bad request
 app.use((err, req, res, next) => {
-    // log the error...
-    // if (err)
-    //     console.error(err);
+    if (config.LOG_VALIDATION_ERRORS && err)
+        console.error(err);
     res.status(err.httpStatusCode).send({error : err.message});
 });
 

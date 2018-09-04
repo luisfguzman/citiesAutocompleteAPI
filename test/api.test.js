@@ -136,6 +136,30 @@ describe('cities autocomplete RESTful API Tests', () => {
                 });
         });
 
+        it('it should GET 400 bad request (lat outside range [-90,90])', (done) => {
+            chai.request(server)
+                .get(`${endpoint}q=${term}&latitude=-91&${longitude}`)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    res.body.error.should.be.a('string');
+                    res.body.error.should.be.eql('latitude is outside range of -90 and 90 degrees');
+                    done();
+                });
+        });
+
+        it('it should GET 400 bad request (long outside range [-180,180])', (done) => {
+            chai.request(server)
+                .get(`${endpoint}q=${term}&${latitude}&longitude=181`)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    res.body.error.should.be.a('string');
+                    res.body.error.should.be.eql('longitude is outside range of -180 and 180 degrees');
+                    done();
+                });
+        });
+
         it('it should GET 400 bad request (radius NaN)', (done) => {
             chai.request(server)
                 .get(`${endpoint}q=${term}&${latitude}&${longitude}&radius=abc123`)
